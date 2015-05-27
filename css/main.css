@@ -2,11 +2,36 @@ body {
     padding-left: 20px;
     padding-top: 60px;
 }
-@media (max-width: 979px) {
+p {
+    text-align: center;
+    padding-top: 20px;
+}
+h4 {
+    text-align: center;
+}
+.navbar-inner {
+    min-height: 0px;
+}
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 50px;
+    height: 50px;
+    padding-top: 0;
+}
+@media (max-width: 980px) {
     body {
-        padding-top: 0px;
+        padding-top: 60px;
+    }
+    img {
+        max-width: 150px;
     }
 }
-p {
-    padding-top: 20px;
+@media (max-width: 480px) {
+    body {
+        padding-top: 60px;
+    }
+    img {
+        width: 100%;
+        max-width: 150px;
+    }
 }
