@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <title>Locations</title>
+</head>
+<body>
+    <!--navbar-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <!--Logo Button-->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.pioneerindustrial.com/home.html">
+                    <img alt="Pioneer Industrial Company" style="max-width:100px; margin-top: -7px;"
+                         src="PioneerVector.png">
+                </a>
+            </div>
+            <div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav nav-divider">
+                        <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Services
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Atom Flash Cutter</a></li>
+                                <li><a href="#">Mobile Field Repairs Unit</a></li>
+                                <li><a href="#">Valve Repair Service</a></li>
+                                <li><a href="#">Pump Repair Service</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Products <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Valves</a></li>
+                                <li><a href="#">Pumps</a></li>
+                                <li><a href="#">Fluid Sealing</a></li>
+                                <li><a href="#">Flexigraf</a></li>
+                                <li><a href="#">AnsiPro Pumps</a></li>
+                                <li><a href="#">Heat Treating</a></li>
+                                <li><a href="#">Industrial Hose and Fittings</a></li>
+                                <li><a href="#">Mechanical Seals</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Universal Digital Positioner</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Partners <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Dresser Masoeilan</a></li>
+                                <li><a href="#">Affiliations</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">About <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">About Pioneer Industrial</a></li>
+                                <li><a href="locations.html">Locations</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Product Mangers</a></li>
+                                <li><a href="#">News and Events</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
+                        <li class="divider"></li>
+                        <li><a href="http://www.pioneerwebview.com/VKV6/Securelogin.aspx"><span class="glyphicon glyphicon-log-in"></span>  ValveKeep Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <img id ="logo" alt="Pioneer Industrial Company"
+             src="PioneerVector.png">
+        <h2>Locations</h2><br>
+        <div class="container-fluid">
+        <!--Insert Map-->
+        <div class="col-md-8 col-lg-6" id="map"></div>
+        <script type="text/javascript">
+            var bounds = new google.maps.LatLngBounds();
+
+            //pioneer locations
+            var locations = [
+                ['Pioneer St. Louis', 38.605489, -90.202419],
+                ['Pioneer Kansas City', 39.080832, -94.598111],
+                ['Pioneer Decatur', 39.857719, -88.926736]
+
+            ];
+
+            var map=new google.maps.Map(document.getElementById("map"),{
+                //center: new google.maps.LatLng(39.653657, -91.734908),
+                //zoom:7,
+                mapTypeId:google.maps.MapTypeId.ROADMAP,
+                zoomControl:true,
+                zoomControlOptions: {
+                    style:google.maps.ZoomControlStyle.DEFAULT
+                }
+            });
+            //markers
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    map: map,
+                    icon: 'marker.png'
+                });
+
+                bounds.extend(marker.position);
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(locations[i][0]);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+
+                google.maps.event.addListener(marker,'click',function() {
+                    map.setZoom(9);
+                    map.setCenter(this.getPosition());
+                });
+
+//            google.maps.event.addListener(map,'center_changed',function() {
+//                map.setZoom(9);
+//                window.setTimeout(function() {
+//                    map.panTo(marker.getPosition());
+//                },3000);
+//            });
+            }
+
+            map.fitBounds(bounds);
+
+            var listener = google.maps.event.addListener(map, "idle", function () {
+                map.setZoom(7);
+                google.maps.event.removeListener(listener);
+            });
+
+
+        </script>
+        <div class="container">
+            <table class="col-md-4 col-lg-6 table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>Address</th>
+                    <th>City/State</th>
+                    <th>Phone #</th>
+                    <th>E-mail</th>
+                    <th>Hours</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th>St. Louis, MO</th>
+                    <th>Phone #</th>
+                    <th>E-mail</th>
+                    <th>Hours</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Decatur, IL</th>
+                    <th>Phone #</th>
+                    <th>E-mail</th>
+                    <th>Hours</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Kansas City, MO</th>
+                    <th>Phone #</th>
+                    <th>E-mail</th>
+                    <th>Hours</th>
+                    <th></th>
+                </tr>
+            </tbody>
+
+
+        </table>
+        </div>
+
+        </div>
+    </div>
+
+
+</body>
+</html>
