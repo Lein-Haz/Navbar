@@ -8,6 +8,9 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+
+    <!--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCxTaGF0Tci5jGpOrNTguiU88LoU54hU5I"></script>-->
     <title>Pioneer Industrial Company</title>
 </head>
 <body style="background-color: #f9f2f4">
@@ -77,10 +80,153 @@
         <h1>Welcome to Pioneer Industrial Corp!</h1>
         <p><a class="btn btn-primary btn-lg" href="http://www.pioneerindustrial.com/aboutpioneerindustrial.html" role="button">Learn more</a></p>
     </div>
+
+    <div id="map" style="width:60%;height:400px;margin-left: auto;margin-right: auto;">
+
+    </div>
+    <script type="text/javascript">
+        var bounds = new google.maps.LatLngBounds();
+
+        //pioneer locations
+        var locations = [
+            ['Pioneer St. Louis', 38.605489, -90.202419],
+            ['Pioneer Kansas City', 39.080832, -94.598111],
+            ['Pioneer Decatur', 39.857719, -88.926736]
+
+        ];
+
+        var map=new google.maps.Map(document.getElementById("map"),{
+            //center: new google.maps.LatLng(39.653657, -91.734908),
+            //zoom:7,
+            mapTypeId:google.maps.MapTypeId.ROADMAP
+        });
+        //markers
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map
+            });
+
+            bounds.extend(marker.position);
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+
+        map.fitBounds(bounds);
+
+        var listener = google.maps.event.addListener(map, "idle", function () {
+            map.setZoom(7);
+            google.maps.event.removeListener(listener);
+        });
+
+
+    </script>
+
     <h2>
         Example Content
     </h2>
     <div class="container-fluid">
+        <div class="col-md-4">
+            <h4>Column 1</h4>
+            <p>
+
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+                Here is some content for filler.<br>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h4>Column 2</h4>
+            <p>
+
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h4>Column 3</h4>
+            <p>
+
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            Here is some content for filler.<br>
+            </p>
+        </div>
+    </div><div class="container-fluid">
         <div class="col-md-4">
             <h4>Column 1</h4>
             <p>
