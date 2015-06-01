@@ -57,9 +57,19 @@ h4 {
 @media (max-width: 980px) {
     body {
         padding-top: 60px;
+        padding-right: 15px;
+        padding-left: 15px;
     }
     img {
         max-width: 150px;
+    }
+    .jumbotron {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 95%;
+        border-radius: 10px;
+
     }
     #map {
         max-width: 300px;
@@ -71,10 +81,20 @@ h4 {
 @media (max-width: 480px) {
     body {
         padding-top: 60px;
+        padding-right: 15px;
+        padding-left: 15px;
     }
     img {
         width: 100%;
         max-width: 150px;
+    }
+    .jumbotron {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 95%;
+        border-radius: 10px;
+
     }
     #map {
         max-width: 400px;

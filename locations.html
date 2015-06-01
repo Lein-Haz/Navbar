@@ -9,6 +9,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script>
+        if (!jQuery.browser.mobile) {
+            jQuery('body').on('click', 'a[href^="tel:"]', function() {
+                jQuery(this).attr('href',
+                        jQuery(this).attr('href').replace(/^tel:/, 'callto:'));
+            });
+        }
+    </script>
+
     <title>Locations</title>
 </head>
 <body>
@@ -25,52 +34,60 @@
                 </button>
                 <a class="navbar-brand" href="http://www.pioneerindustrial.com/home.html">
                     <img alt="Pioneer Industrial Company" style="max-width:100px; margin-top: -7px;"
-                         src="PioneerVector.png">
+                         src="images/PioneerVector.png">
                 </a>
             </div>
             <div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav nav-divider">
+                        <!--home-->
                         <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Services
-                            <span class="caret"></span></a>
+                        <!--services-->
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Services<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Atom Flash Cutter</a></li>
-                                <li><a href="#">Mobile Field Repairs Unit</a></li>
-                                <li><a href="#">Valve Repair Service</a></li>
-                                <li><a href="#">Pump Repair Service</a></li>
+                                <li><a href="services.html#afc">Atom Flash Cutter</a></li>
+                                <li><a href="services.html#mfru">Mobile Field Repairs
+                                    Unit</a></li>
+                                <li><a href="services.html#vrs">Valve Repair Service</a></li>
+                                <li><a href="services.html#prs">Pump Repair Service</a></li>
                             </ul>
                         </li>
+                        <!--products-->
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Products <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Valves</a></li>
-                                <li><a href="#">Pumps</a></li>
-                                <li><a href="#">Fluid Sealing</a></li>
-                                <li><a href="#">Flexigraf</a></li>
-                                <li><a href="#">AnsiPro Pumps</a></li>
-                                <li><a href="#">Heat Treating</a></li>
-                                <li><a href="#">Industrial Hose and Fittings</a></li>
-                                <li><a href="#">Mechanical Seals</a></li>
+                                <li><a href="products.html#valves">Valves</a></li>
+                                <li><a href="products.html#pumps">Pumps</a></li>
+                                <li><a href="products.html#fluid">Fluid Sealing</a></li>
+                                <li><a href="products.html#flexi">Flexigraf</a></li>
+                                <li><a href="products.html#ansi">AnsiPro Pumps</a></li>
+                                <li><a href="products.html#heat">Heat Treating</a></li>
+                                <li><a href="products.html#ihaf">Industrial Hose and
+                                    Fittings</a></li>
+                                <li><a href="products.html#mech">Mechanical Seals</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Universal Digital Positioner</a></li>
+                                <li><a href="products.html#udp">Universal Digital
+                                    Positioner</a></li>
                             </ul>
                         </li>
+                        <!--partners-->
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Partners <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Dresser Masoeilan</a></li>
-                                <li><a href="#">Affiliations</a></li>
+                                <li><a href="partners.html#dm">Dresser Masoeilan</a></li>
+                                <li><a href="partners.html#affil">Affiliations</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">About <span class="caret"></span></a>
+                        <!--about-->
+                        <li class="dropdown active"><a class="dropdown-toggle"
+                                                 data-toggle="dropdown" href="#">About <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">About Pioneer Industrial</a></li>
+                                <li><a href="about.html#about">About Pioneer Industrial</a></li>
                                 <li><a href="locations.html">Locations</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Product Mangers</a></li>
-                                <li><a href="#">News and Events</a></li>
+                                <li><a href="about.html#contact">Contact Us</a></li>
+                                <li><a href="about.html#pm">Product Mangers</a></li>
+                                <li><a href="about.html#news">News and Events</a></li>
                             </ul>
                         </li>
-
+                        <!--Valvkeep-->
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
@@ -83,11 +100,11 @@
     </nav>
     <div class="jumbotron">
         <img id ="logo" alt="Pioneer Industrial Company"
-             src="PioneerVector.png">
+             src="images/PioneerVector.png">
         <h2>Locations</h2><br>
         <div class="container-fluid">
         <!--Insert Map-->
-        <div class="col-md-8 col-lg-6" id="map"></div>
+        <div class="col-md-6 col-lg-6" id="map"></div>
         <script type="text/javascript">
             var bounds = new google.maps.LatLngBounds();
 
@@ -118,7 +135,7 @@
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                     map: map,
-                    icon: 'marker.png'
+                    icon: 'images/marker.png'
                 });
 
                 bounds.extend(marker.position);
@@ -152,12 +169,13 @@
 
 
         </script>
-        <div class="container">
-            <table class="col-md-4 col-lg-6 table table-bordered table-responsive">
+        <div class="container-fluid">
+            <table class="col-md-6 col-lg-6 table table-bordered table-responsive">
             <thead>
                 <tr>
                     <th>Address</th>
                     <th>City/State</th>
+                    <th>Zip</th>
                     <th>Phone #</th>
                     <th>E-mail</th>
                     <th>Hours</th>
@@ -166,25 +184,29 @@
             </thead>
             <tbody>
                 <tr>
-                    <th></th>
+                    <th>400 Russell Blvd.</th>
                     <th>St. Louis, MO</th>
-                    <th>Phone #</th>
+                    <th>63104</th>
+                    <th><a href="tel:18007677867">(800)767-7867</a></th>
                     <th>E-mail</th>
                     <th>Hours</th>
                     <th></th>
                 </tr>
                 <tr>
-                    <th></th>
+                    <th>1501 N 22nd St.</th>
                     <th>Decatur, IL</th>
-                    <th>Phone #</th>
+                    <th>62526</th>
+                    <th><a href="tel:12177915293">(217)791-5293</a></th>
                     <th>E-mail</th>
                     <th>Hours</th>
                     <th></th>
                 </tr>
                 <tr>
-                    <th></th>
+                    <th>2611 Southwest Blvd.</th>
                     <th>Kansas City, MO</th>
-                    <th>Phone #</th>
+                    <th>64108</th>
+                    <th><a href="tel:18167536333">(816)753-6333</a> /
+                        <a href="tel:18007677867">(800)767-7867</a> </th>
                     <th>E-mail</th>
                     <th>Hours</th>
                     <th></th>
