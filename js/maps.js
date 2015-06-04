@@ -1,8 +1,19 @@
 /**
  * Created by Nickkaczmarek on 6/2/15.
  */
-$(document).ready(function(){
     console.log("intitializing");
+    var map;
+    function initialize() {
+        alert("initialize");
+        var mapOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng(-34.397, 150.644)
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+    }
+
+    google.maps.event.addDomListener($("#map-canvas"), 'load', initialize);
 
         //var bounds = new google.maps.LatLngBounds();
         //
@@ -14,7 +25,7 @@ $(document).ready(function(){
         //
         //];
 
-        var map;
+
         var mapOptions={
             center: new google.maps.LatLng(39.653657, -91.734908),
             zoom:7,
@@ -24,10 +35,7 @@ $(document).ready(function(){
                 style:google.maps.ZoomControlStyle.DEFAULT
             }
         };
-    function initialize(){
-        map=new google.maps.Map(document.getElementById("map"), mapOptions)
-        alert("initialized");
-    };
+
 
 
 
@@ -73,11 +81,10 @@ $(document).ready(function(){
     //        google.maps.event.removeListener(listener);
     //    });
     //
-    google.maps.event.addDomListener(window, 'load', initialize);
+    //google.maps.event.addDomListener(window, 'load', initialize);
 
 
     alert("Farts");
 
 
-});
 
